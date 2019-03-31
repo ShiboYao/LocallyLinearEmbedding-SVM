@@ -4,8 +4,9 @@ Implement Locally Linear Embedding for nonlinear dimensionality reduction, and u
 
 Parallel implementation. 
 
-![image](https://github.com/ShiboYao/LocallyLinearEmbedding-SVM/blob/master/sphere.pdf)
-![image](https://github.com/ShiboYao/LocallyLinearEmbedding-SVM/blob/master/twin.pdf)
+![](https://github.com/ShiboYao/LocallyLinearEmbedding-SVM/blob/master/sphere.pdf?raw=true)
+
+![](https://github.com/ShiboYao/LocallyLinearEmbedding-SVM/blob/master/twin.pdf?raw=true)
 
 
 espoyao(at)gmail(got)com
