@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from util import *
 from spectral import LLE
 from sklearn.decomposition import PCA
+from mpl_toolkits.mplot3d import Axes3D
 
 
 
@@ -38,7 +39,7 @@ if __name__ == "__main__":
 
     k = 10
     d = 2
-
+    
     for key in data_dic:
         print(key)
         data = data_dic[key]
@@ -59,3 +60,8 @@ if __name__ == "__main__":
 
         fig.savefig(key+'.pdf')
         print('\n')
+    
+    fig3d = plt.figure()
+    ax = fig3d.add_subplot(111, projection='3d')
+    ax.scatter(twin[:,1], twin[:,0], twin[:,2], c=twin[:,3])
+    plt.savefig('twin3d.pdf')
