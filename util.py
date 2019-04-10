@@ -9,11 +9,46 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 
+def gridSearchCV(X, y, k, func, C_list, parallel=False):
+    n = len(y)
+    if n < k:
+        print("Too many folds or too few sampels!")
+        exit(0)
+    index = np.random.choice(n, n, replace=False)
+    index = np.array_split(index, k)
+    accuracy_list = []
+    ind_full = np.array(range(n))
+    
+    for C in C_list:
+        clf = func(C = C)
+        acc_list = []
+        for ind in index:
+            ind_train = list(set(ind_full) - set(ind))
+            clf.fit(X[ind_train], y[ind_train], parallel=parallel)
+            y_hat = clf.predict(X[ind])
+            acc = sum(y_hat==y[ind])/len(ind)
+            acc_list.append(acc)
+        acc_avg = sum(acc_list)/len(acc_list)
+        accuracy_list.append(acc_avg)
+    print(accuracy_list)
+    best_C = C_list[np.argmax(accuracy_list)]
+    clf = func(C = best_C)
+    clf.fit(X, y, parallel=parallel)
+
+    return clf, best_C
+
+
 def get_20news(voc_size = None):
+    cate = ['alt.atheism', 
+            'talk.religion.misc',
+            'comp.graphics', 
+            'sci.space']
+    '''
     cate = ['rec.autos', #take a subset only
             'rec.motorcycles',
             'rec.sport.baseball',
             'rec.sport.hockey']
+    '''
     newsgroups_train = datasets.fetch_20newsgroups(subset='train', categories=cate)
     vectorizer = TfidfVectorizer(max_features=voc_size)
     vectors = vectorizer.fit_transform(newsgroups_train.data)
@@ -24,6 +59,16 @@ def get_20news(voc_size = None):
     data = data.tocsr().toarray()
 
     return data
+
+
+def get_faces():
+    d = datasets.fetch_olivetti_faces()
+    X = d.data
+    y = d.target.reshape(-1,1)
+    data = np.hstack((X, y))
+
+    return data
+
 
 
 def read_pgm(pgmf):
