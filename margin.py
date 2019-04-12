@@ -3,12 +3,14 @@ Shibo Yao, April 4 2019
 Multiclass Support Vector Machine, Linear Kernel
 Parallel training for pairwise hyperplanes
 '''
+import sys
 import numpy as np
 #from util import *
 import multiprocessing as mp
 from sklearn.datasets import load_breast_cancer, load_iris, load_digits, load_wine
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
+import time
 
 
 
@@ -35,7 +37,7 @@ class SVM(object):
         label_set = set(y.flat)
         label_list = [self.label2id[s] for s in label_set]
         label_list = sorted(label_list)
-        print(label_list)
+        #print(label_list)
         y[y==label_list[0]] = -1
         y[y==label_list[1]] = 1
 
@@ -72,7 +74,7 @@ class SVM(object):
                 while j < mem and temp>=err_pre[j]:
                     j = j+1
                 if j == mem:
-                    print("early stop")
+                    #print("early stop")
                     return w
                 else :
                     k = 0
@@ -233,6 +235,10 @@ class SVM(object):
 seed=123
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Specify 0 for single core and 1 for parallel")
+        exit(0)
+    parallel=bool(int(sys.argv[1]))
     #data = get_synthetic('moons', n_samples=1000, noise=0.1)
     #data = load_breast_cancer()
     #data = load_iris()
@@ -251,10 +257,12 @@ if __name__ == "__main__":
     y_hat = clf.predict(X_test)
     '''
     clf = SVM(C=1, lr=0.001) #my version
-    clf.fit(X_train, y_train, parallel=True)
+    start = time.time()
+    clf.fit(X_train, y_train, parallel=parallel)
+    print("Time: %.4f s" %(time.time()-start))
     y_hat = clf.predict(X_test)
     
-    print(y_hat)    
+    #print(y_hat)    
     acc = (y_hat==y_test).sum() / len(y_test)
 
     print("accuracy %.4f" %acc)
