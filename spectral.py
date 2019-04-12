@@ -188,19 +188,22 @@ def LLE(X, k, d, n_jobs=-1, epsilon=1e-4):
 
 
 if __name__ == "__main__":
-    if (len(sys.argv) != 4):
-        printf("Specify dataName, k and d!")
+    if (len(sys.argv) != 5):
+        print("Specify dataName, k and d and n_jobs!")
         exit(0)
 
     fname = sys.argv[1]
     k = int(sys.argv[2])
     d = int(sys.argv[3])
+    n_jobs = int(sys.argv[4])
 
     data = np.loadtxt("data/"+fname+'.txt', delimiter=',', dtype=float)
     X = data[:,:-1]
     y = data[:,-1]
 
-    comp = LLE(X, k, d, n_jobs=-1, epsilon=1e-3)
+    start = time.time()
+    comp = LLE(X, k, d, n_jobs=n_jobs, epsilon=1e-3)
+    print("Time: %.4f s" %(time.time()-start))
     f = plt.figure()
     plt.scatter(comp[:,0], comp[:,1], c=y, s=10, alpha=0.6)
     f.savefig("LLE.pdf")
