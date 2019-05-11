@@ -4,4 +4,6 @@ Implement Locally Linear Embedding for nonlinear dimensionality reduction, and u
 
 Parallel implementation. 
 
+A detailed project description can be found [here](https://drive.google.com/open?id=1uxprWotf52mKJ2pECS8j8hwqjMLjCzhH).
+
 espoyao(at)gmail(got)com
