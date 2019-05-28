@@ -6,4 +6,4 @@ Parallel implementation.
 
 A detailed project description can be found [here](https://drive.google.com/file/d/1uSv2iLuIflHpdZSwJ1XikduESGdA6Axp/view?usp=sharing).
 
-espoyao(at)gmail(got)com
+espoyao(at)gmail(dot)com
