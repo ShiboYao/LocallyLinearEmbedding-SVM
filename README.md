@@ -4,6 +4,6 @@ Implement Locally Linear Embedding for nonlinear dimensionality reduction, and u
 
 Parallel implementation. 
 
-A detailed project description can be found [here](https://drive.google.com/file/d/1Yv0hCtUm3ysw8ojVYdumva8DUCFmb2E-/view?usp=sharing).
+A detailed project description can be found [here](https://raw.githubusercontent.com/ShiboYao/LocallyLinearEmbedding-SVM/master/SVM_LLE.pdf).
 
 espoyao(at)gmail(dot)com
